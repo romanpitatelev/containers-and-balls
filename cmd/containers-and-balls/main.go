@@ -1,24 +1,29 @@
 package main
 
 import (
-	scannerservice "github.com/romanpitatelev/containers-and-balls/internal/scanner-service"
-	sortingservice "github.com/romanpitatelev/containers-and-balls/internal/sorting-service"
-	writerservice "github.com/romanpitatelev/containers-and-balls/internal/writer-service"
+	"fmt"
+
+	"github.com/romanpitatelev/containers-and-balls/internal/reader"
+	"github.com/romanpitatelev/containers-and-balls/internal/sorter"
 	"github.com/rs/zerolog/log"
 )
 
 func main() {
-	scanner := scannerservice.New()
-	writer := writerservice.New()
-
-	containersSize, ballColorCounts, err := scanner.Scan()
+	number, err := reader.ReadNumber()
 	if err != nil {
-		log.Panic().Err(err).Msg("failed to scan data")
+		log.Panic().Err(err).Msg("invalid number")
 	}
 
-	result := sortingservice.SortAndCompareSlices(containersSize, ballColorCounts)
+	containersSize, ballColorCounts, err := reader.ReadContainersBals(number)
+	if err != nil {
+		log.Panic().Err(err).Msg("failed to scan input data")
+	}
 
-	if err = writer.Write(result); err != nil {
-		log.Panic().Err(err).Msg("failed to write result")
+	isPossible := sorter.SortAndCompareSlices(containersSize, ballColorCounts)
+
+	if isPossible {
+		fmt.Println("yes")
+	} else {
+		fmt.Println("no")
 	}
 }

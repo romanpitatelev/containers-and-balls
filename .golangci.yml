@@ -5,6 +5,7 @@ linters:
   disable:
     - depguard
     - exhaustruct
+    - forbidigo
     - ireturn
     - paralleltest
     - revive
