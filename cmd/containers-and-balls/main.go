@@ -1,9 +1,8 @@
 package main
 
 import (
-	"sort"
-
 	scannerservice "github.com/romanpitatelev/containers-and-balls/internal/scanner-service"
+	sortingservice "github.com/romanpitatelev/containers-and-balls/internal/sorting-service"
 	writerservice "github.com/romanpitatelev/containers-and-balls/internal/writer-service"
 	"github.com/rs/zerolog/log"
 )
@@ -17,22 +16,9 @@ func main() {
 		log.Panic().Err(err).Msg("failed to scan data")
 	}
 
-	result := compareSlices(containersSize, ballColorCounts)
+	result := sortingservice.SortAndCompareSlices(containersSize, ballColorCounts)
 
 	if err = writer.Write(result); err != nil {
 		log.Panic().Err(err).Msg("failed to write result")
 	}
-}
-
-func compareSlices(containers []int, balls []int) string {
-	sort.Ints(containers)
-	sort.Ints(balls)
-
-	for i := range containers {
-		if containers[i] != balls[i] {
-			return "no"
-		}
-	}
-
-	return "yes"
 }

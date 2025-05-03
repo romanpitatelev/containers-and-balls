@@ -1,5 +1,5 @@
 run: 
-	go build -o bin/containers_and_balls ./cmd/containers-and-balls/main.go
+	go build -o bin/main ./cmd/containers-and-balls/main.go
 	./bin/main
 
 tidy:
