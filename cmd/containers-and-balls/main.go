@@ -14,7 +14,7 @@ func main() {
 		log.Panic().Err(err).Msg("invalid number")
 	}
 
-	containersSize, ballColorCounts, err := reader.ReadContainersBals(number)
+	containersSize, ballColorCounts, err := reader.ReadContainersBalls(number)
 	if err != nil {
 		log.Panic().Err(err).Msg("failed to scan input data")
 	}

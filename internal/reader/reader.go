@@ -37,7 +37,7 @@ func ReadNumber() (int, error) {
 	return n, nil
 }
 
-func ReadContainersBals(number int) ([]int, []int, error) {
+func ReadContainersBalls(number int) ([]int, []int, error) {
 	input := bufio.NewReader(os.Stdin)
 
 	containersSize := make([]int, number)
